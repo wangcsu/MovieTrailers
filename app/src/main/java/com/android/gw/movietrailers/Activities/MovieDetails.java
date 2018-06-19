@@ -13,6 +13,7 @@ import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.gw.movietrailers.BuildConfig;
 import com.android.gw.movietrailers.Models.Movie;
 import com.android.gw.movietrailers.Models.Trailer;
 import com.android.gw.movietrailers.R;
@@ -40,6 +41,7 @@ public class MovieDetails extends AppCompatActivity {
     List<Trailer> trailerList;
     RecyclerView recyclerView;
     TrailerRecyclerAdapter recyclerAdapter;
+    private final static String API_KEY = BuildConfig.ApiKey;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +69,7 @@ public class MovieDetails extends AppCompatActivity {
 
         requestQueue = Volley.newRequestQueue(this);
 
-        String url = "https://api.themoviedb.org/3/movie/" + movie.getId() + "/videos?api_key=58b68d6af6a67e1fadcc2384cb198c11&language=en-US";
+        String url = "https://api.themoviedb.org/3/movie/" + movie.getId() + "/videos?api_key=" + API_KEY + "&language=en-US";
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {

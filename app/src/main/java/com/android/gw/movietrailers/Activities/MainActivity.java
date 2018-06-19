@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
+import com.android.gw.movietrailers.BuildConfig;
 import com.android.gw.movietrailers.Models.Movie;
 import com.android.gw.movietrailers.R;
 import com.android.gw.movietrailers.UIAdapters.RecyclerAdapter;
@@ -34,7 +35,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private RequestQueue mRequestQueue;
-    private final static String API_KEY = "";
+    private final static String API_KEY = BuildConfig.ApiKey;
     private List<Movie> movies;
     private RecyclerView recyclerView;
     private RecyclerAdapter recyclerAdapter;
@@ -57,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.HORIZONTAL));
 
         mRequestQueue = Volley.newRequestQueue(this);
-        String url = "https://api.themoviedb.org/3/movie/now_playing?api_key=58b68d6af6a67e1fadcc2384cb198c11&language=en-US&page=1";
+        String url = "https://api.themoviedb.org/3/movie/upcoming?api_key=" + API_KEY + "&language=en-US&page=1";
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(url, jsonObject[0], new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
