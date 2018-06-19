@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.android.gw.movietrailers.Models.Trailer;
 import com.android.gw.movietrailers.*;
+import com.google.android.youtube.player.YouTubeApiServiceUtil;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubeStandalonePlayer;
 import com.google.android.youtube.player.YouTubeThumbnailLoader;
@@ -25,6 +26,7 @@ public class TrailerRecyclerAdapter extends RecyclerView.Adapter<TrailerRecycler
 
     private Context context;
     private List<Trailer> trailers;
+    private static final String Youtube_API_KEY = BuildConfig.YoutubeKey;
 
     public TrailerRecyclerAdapter(Context c, List<Trailer> t) {
         this.context = c;
@@ -48,7 +50,7 @@ public class TrailerRecyclerAdapter extends RecyclerView.Adapter<TrailerRecycler
             relativeLayoutOverYouTubeThumbnailView = itemView.findViewById(R.id.relativeLayout_over_youtube_thumbnail);
             playButton.setOnClickListener(this);
 
-            youTubeThumbnailView.initialize("AIzaSyDR7yPFBdKkIbJlMkQNNjKXDRfQpY_vpg8", new YouTubeThumbnailView.OnInitializedListener() {
+            youTubeThumbnailView.initialize(Youtube_API_KEY, new YouTubeThumbnailView.OnInitializedListener() {
                 @Override
                 public void onInitializationSuccess(YouTubeThumbnailView youTubeThumbnailView, final YouTubeThumbnailLoader youTubeThumbnailLoader) {
                     youTubeThumbnailLoader.setVideo(trailers.get(getAdapterPosition()).getKey());
@@ -76,7 +78,7 @@ public class TrailerRecyclerAdapter extends RecyclerView.Adapter<TrailerRecycler
 
         @Override
         public void onClick(View v) {
-            Intent i = YouTubeStandalonePlayer.createVideoIntent((Activity) v.getContext(), "AIzaSyDR7yPFBdKkIbJlMkQNNjKXDRfQpY_vpg8",
+            Intent i = YouTubeStandalonePlayer.createVideoIntent((Activity) v.getContext(), Youtube_API_KEY,
                     trailers.get(getAdapterPosition()).getKey(), 100, false, true);
             context.startActivity(i);
         }

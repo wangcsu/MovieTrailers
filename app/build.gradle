@@ -14,12 +14,16 @@ android {
         debug {
             buildConfigField('String', 'ApiKey', tmdb_apikey)
             resValue('string', 'api_key', tmdb_apikey)
+            buildConfigField('String', 'YoutubeKey', youtube_apikey)
+            resValue('string', 'youtube_key', youtube_apikey)
         }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             buildConfigField('String', 'ApiKey', tmdb_apikey)
             resValue('string', 'api_key', tmdb_apikey)
+            buildConfigField('String', 'YoutubeKey', youtube_apikey)
+            resValue('string', 'youtube_key', youtube_apikey)
         }
     }
 }
